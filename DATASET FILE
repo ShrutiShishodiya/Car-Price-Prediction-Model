@@ -1,0 +1,31 @@
+#Mount the Google Drive
+from google.colab import drive
+drive.mount('/content/drive')
+
+#Access the CSV file
+csv_path='/content/drive/MyDrive/archive.zip'
+
+#Extract the Zip file
+import zipfile
+import os
+zip_file_path='/content/drive/MyDrive/archive.zip'
+extraction_dir='/content/extracted_data'
+os.makedirs(extraction_dir,exist_ok=True)
+with zipfile.ZipFile(zip_file_path,'r') as zip_ref:
+  zip_ref.extractall(extraction_dir)
+print("Files in the extraction directory :")
+print(os.listdir(extraction_dir))
+
+  
+#Move the CSV file to Colab
+import shutil
+source_path='/content/extracted_data/train.csv'
+destination_path='/content/train.csv'
+shutil.move(source_path,destination_path)
+print("CSV file moved successfully")
+     
+
+
+
+     
+
